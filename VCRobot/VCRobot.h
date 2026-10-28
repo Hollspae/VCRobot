@@ -24,6 +24,7 @@ namespace VCRobotLib {
 
 		void CleaningOn();
 		void CleaningOff();
+		bool isCleaning = false;
 
 		sf::Vector2f GetPosition() const;
 		float GetRotation() const;

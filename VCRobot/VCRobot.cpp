@@ -16,16 +16,34 @@ VCRobotLib::VCRobot::VCRobot(float x, float y, float rotation)
 VCRobotLib::VCRobot::~VCRobot()
 {
 }
+int SetTextures(sf::Texture textureOn, sf::Texture textureOff, sf::Sprite spriteOff, sf::Sprite spriteOn) {
 
-void VCRobotLib::VCRobot::Draw(bool action)
-{
-
-}
-
-int SetTextures(sf::Texture textureOn, sf::Texture textureOff) {
-
-	if (textureOn.loadFromFile("images/robot_clean_on.png") && textureOn.loadFromFile("images/robot_clean_off.png")) {
+	if (textureOn.loadFromFile("Images/robot_clean_on.png") && textureOff.loadFromFile("Images/robot_clean_off.png")) {
+		spriteOn.setTexture(textureOn);
+		spriteOff.setTexture(textureOff);
 		return true;
 	}
 	return false;
+}
+
+void VCRobotLib::VCRobot::Draw(bool action)
+{
+	if (action) {
+		
+	};
+}
+
+void VCRobotLib::VCRobot::CleaningOn()
+{
+	isCleaning = true;
+}
+
+void VCRobotLib::VCRobot::CleaningOff()
+{
+	isCleaning = false;
+}
+
+bool VCRobotLib::VCRobot::IsCleanOn() const
+{
+	return isCleaning;
 }
