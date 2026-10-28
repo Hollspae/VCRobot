@@ -1,32 +1,26 @@
 #include <SFML/Graphics.hpp>
+#include "VCRobot.h"
+#include <iostream>
 
-//class VCRobot
-//{
-//public:
-//    void Draw(bool ) {}
-//    void Show() {}
-//    void Hide() {}
-//    void MoveForward() {}
-//    void MoveBackward() {}
-//    void SetStepSize() {}
-//    void GetStepSize() {}
-//    void TurnLeft() {}
-//    void TurnRight() {}
-//    void Rotate() {}
-//    void CleaningOn() {}
-//    void CleaningOff() {}
-//    void GetPosition() {}
-//    void GetRotation() {}
-//    void IsCleanOn() {}
-//    void CanMoveForward() {}
-//    void CanMoveBackward() {}
-//
-//};
-//
-//
-//
-//int main()
-//{
-//
-//    return 0;
-//}
+VCRobotLib::VCRobot::VCRobot(float x, float y, float rotation)
+{
+	float angle = std::fmod(rotation, 360);
+	while (angle >= 360.f) {
+		rotation -= 360.f;
+	};
+	while (angle < 0) {
+		rotation += 360.f;
+	}
+}
+
+VCRobotLib::VCRobot::~VCRobot()
+{
+}
+
+int main() {
+	sf::Texture textureOn;
+
+	if (textureOn.loadFromFile("images/robot_clean_on.png")) {
+		std::cout << "all ok";
+	}
+}

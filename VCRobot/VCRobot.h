@@ -1,12 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-namespace VCRobot {
+namespace VCRobotLib {
 
 	class VCRobot {
 	public:
-
 		VCRobot(float x, float y, float rotation);
+		~VCRobot();
 
 		void Draw(bool);
 		void Show();
