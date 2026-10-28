@@ -8,7 +8,7 @@ namespace VCRobotLib {
 		VCRobot(float x, float y, float rotation);
 		~VCRobot();
 
-		void Draw(bool);
+		void Draw(bool action);
 		void Show();
 		void Hide();
 

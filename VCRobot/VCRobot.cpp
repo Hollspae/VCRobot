@@ -17,10 +17,15 @@ VCRobotLib::VCRobot::~VCRobot()
 {
 }
 
-int main() {
-	sf::Texture textureOn;
+void VCRobotLib::VCRobot::Draw(bool action)
+{
 
-	if (textureOn.loadFromFile("images/robot_clean_on.png")) {
-		std::cout << "all ok";
+}
+
+int SetTextures(sf::Texture textureOn, sf::Texture textureOff) {
+
+	if (textureOn.loadFromFile("images/robot_clean_on.png") && textureOn.loadFromFile("images/robot_clean_off.png")) {
+		return true;
 	}
+	return false;
 }
