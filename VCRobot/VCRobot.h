@@ -1,36 +1,44 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-
-namespace VCRobotLib {
+namespace VCRobot {
 
 	class VCRobot {
 	public:
 
 		VCRobot(float x, float y, float rotation);
 
-		void Draw(bool visible);
+		void Draw(bool);
 		void Show();
 		void Hide();
 
 		void MoveForward();
 		void MoveBackward();
 
-		void SetStepSize(float step);
+		void SetStepSize(float);
 		void GetStepSize();
 
-		void TurnLeft(float angle);
-		void TurnRight(float angle);
-		void Rotate(float angle);
+		void TurnLeft(float);
+		void TurnRight(float);
+		void Rotate(float);
 
 		void CleaningOn();
 		void CleaningOff();
 
-		sf::Vector2f GetPosition();
-		void GetRotation();
-		void IsCleanOn();
-		void CanMoveForward();
-		void CanMoveBackward();
+		sf::Vector2f GetPosition() const;
+		float GetRotation() const;
+		bool IsCleanOn() const;
 
+		bool CanMoveForward() const;
+		bool CanMoveBackward() const;
+
+		sf::Texture textureOn;
+		sf::Texture textureOff;
+
+		sf::Sprite spriteOn;
+		sf::Sprite spriteOff;
+
+		static  sf::RenderWindow* renderWindow;
+		static void SetRenderWindow(sf::RenderWindow* window);
 	};
 }
