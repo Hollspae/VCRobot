@@ -3,34 +3,71 @@
 #include <iostream>
 
 VCRobotLib::VCRobot::VCRobot(float x, float y, float rotation)
+	: posX(x)
+	, posY(y)
+	, angle(0.0f)
 {
-	float angle = std::fmod(rotation, 360);
-	while (angle >= 360.f) {
-		rotation -= 360.f;
-	};
-	while (angle < 0) {
-		rotation += 360.f;
-	}
+	rotation = std::fmod(rotation, 360.0f);
+	if (rotation < 0.0f)
+		rotation += 360.0f;
+	angle = rotation;
+
+	spriteOn.setPosition(posX, posY);
+	spriteOff.setPosition(posX, posY);
+	spriteOn.setRotation(angle);
+	spriteOff.setRotation(angle);
 }
 
 VCRobotLib::VCRobot::~VCRobot()
 {
 }
-int SetTextures(sf::Texture textureOn, sf::Texture textureOff, sf::Sprite spriteOff, sf::Sprite spriteOn) {
 
-	if (textureOn.loadFromFile("Images/robot_clean_on.png") && textureOff.loadFromFile("Images/robot_clean_off.png")) {
-		spriteOn.setTexture(textureOn);
-		spriteOff.setTexture(textureOff);
-		return true;
+bool VCRobotLib::VCRobot::SetTextures(const std::string& fileOn, const std::string& fileOff)
+{
+	if (!textureOn.loadFromFile(fileOn)) {
+		return false;
 	}
-	return false;
+
+	if (!textureOff.loadFromFile(fileOff)) {
+		return false;
+	}
+
+	spriteOn.setTexture(textureOn);
+	spriteOff.setTexture(textureOff);
+
+	sf::FloatRect boundsOn = spriteOn.getLocalBounds();
+	sf::FloatRect boundsOff = spriteOff.getLocalBounds();
+	spriteOn.setOrigin(boundsOn.width / 2.0f, boundsOn.height / 2.0f);
+	spriteOff.setOrigin(boundsOff.width / 2.0f, boundsOff.height / 2.0f);
+
+	return true;
 }
 
 void VCRobotLib::VCRobot::Draw(bool action)
 {
-	if (action) {
-		
-	};
+	if (!action || !isVisible) return;
+
+	sf::Sprite& activeSprite = isCleaning ? spriteOn : spriteOff;
+
+	renderWindow->draw(activeSprite);
+}
+
+void VCRobotLib::VCRobot::Show()
+{
+	isVisible = true;
+}
+
+void VCRobotLib::VCRobot::Hide()
+{
+	isVisible = false;
+}
+
+void VCRobotLib::VCRobot::MoveForward()
+{
+}
+
+void VCRobotLib::VCRobot::MoveBackward()
+{
 }
 
 void VCRobotLib::VCRobot::CleaningOn()

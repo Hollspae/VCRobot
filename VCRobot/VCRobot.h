@@ -6,7 +6,7 @@ namespace VCRobotLib {
 	class VCRobot {
 	public:
 		VCRobot(float x, float y, float rotation);
-		~VCRobot();
+		virtual ~VCRobot();
 
 		void Draw(bool action);
 		void Show();
@@ -16,7 +16,7 @@ namespace VCRobotLib {
 		void MoveBackward();
 
 		void SetStepSize(float);
-		void GetStepSize();
+		void GetStepSize() const;
 
 		void TurnLeft(float);
 		void TurnRight(float);
@@ -25,6 +25,9 @@ namespace VCRobotLib {
 		void CleaningOn();
 		void CleaningOff();
 		bool isCleaning = false;
+		bool isVisible = true;
+
+		bool SetTextures(const std::string& fileOn, const std::string& fileOff);
 
 		sf::Vector2f GetPosition() const;
 		float GetRotation() const;
@@ -39,7 +42,12 @@ namespace VCRobotLib {
 		sf::Sprite spriteOn;
 		sf::Sprite spriteOff;
 
-		static  sf::RenderWindow* renderWindow;
+		float posX;
+		float posY;
+		float angle;
+
 		static void SetRenderWindow(sf::RenderWindow* window);
+		static  sf::RenderWindow* renderWindow;
+
 	};
 }
